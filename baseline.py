@@ -14,7 +14,7 @@ def get_indices(s):
 
 def get_n_gram_overlap(first, second):
     overlap = set(first) & set(second)
-    return([overlap, len(overlap)])
+    return [overlap, len(overlap)]
 
 
 def set_n_grams(first_tokens, second_tokens, n):
@@ -66,7 +66,7 @@ def get_average_overlap_proportion(train):
     num_0 = 0
 
     for i in range(1, len(train)):
-        if (train[i]['quality'] == 1):
+        if train[i]['quality'] == 1:
             denom = (len(train[i]['first']) + len(train[i]['second'])) / 2
             prop_1 += train[i]['overlap count'] / denom
             num_1 += 1
@@ -84,7 +84,7 @@ def set_new_quality(test, threshold):
         denom = (len(test[i]['first']) + len(test[i]['second'])) / 2
         prop = test[i]['overlap count'] / denom
 
-        if (prop >= threshold):
+        if prop >= threshold:
             test[i]['model quality'] = 1
         else:
             test[i]['model quality'] = 0
