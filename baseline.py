@@ -21,7 +21,7 @@ def create_training_data(s):
     for s, i in zip(train, range(1, len(train))):
 
         tabs = get_indices(s)
-        quality = s[0]
+        quality = int(s[0])
         first = s[tabs[2]+1:tabs[3]]
         second = s[tabs[3]+1:]
 
@@ -49,10 +49,9 @@ def get_average_overlap_proportion(train):
     prop_0 = 0
     num_1 = 0
     num_0 = 0
-    print(train)
 
     for i in range(1, len(train)):
-        if (train[i]['quality'] == '1'):
+        if (train[i]['quality'] == 1):
             denom = (len(train[i]['first']) + len(train[i]['second']))/2
             prop_1 += train[i]['overlap count']/denom
             num_1 += 1
@@ -63,12 +62,22 @@ def get_average_overlap_proportion(train):
 
     return (prop_1/num_1 + prop_0/num_0)/2
 
+def set_new_quality(test, threshold):
+
+    for i in range(1, len(test)):
+        denom = (len(test[i]['first']) + len(test[i]['second']))/2
+        prop = test[i]['overlap count']/denom
+
+        if (prop >= threshold):
+            test[i]['model quality'] = 1
+        else:
+            test[i]['model quality'] = 0
 
 def main():
     train = create_training_data("data/msr_paraphrase_train.txt")
     test= create_training_data("data/msr_paraphrase_test.txt")
-
     threshold = get_average_overlap_proportion(train)
+    set_new_quality(test, threshold)
 
 
 if __name__ == '__main__':
