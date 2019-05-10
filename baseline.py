@@ -2,6 +2,9 @@ import argparse
 import numpy as np
 import nltk
 from nltk.tokenize import RegexpTokenizer
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import precision_score
+from sklearn.metrics import f1_score
 
 def get_indices(s):
     return [i for i, c in enumerate(s) if c == "\t"]
@@ -75,12 +78,30 @@ def set_new_quality(test, threshold):
 
     return test
 
+def get_true_pred(new_test):
+    true = []
+    pred = []
+
+    for i in range(1, len(new_test)):
+        true.append(new_test[i]['quality'])
+        pred.append(new_test[i]['model quality'])
+
+    return true, pred
+
+
 def main():
     train = create_training_data("data/msr_paraphrase_train.txt")
     test= create_training_data("data/msr_paraphrase_test.txt")
     threshold = get_average_overlap_proportion(train)
     new_test = set_new_quality(test, threshold)
+    true, pred = get_true_pred(new_test)
+    accuracy = accuracy_score(true, pred)
+    precision = precision_score(true, pred)
+    f1 = f1_score(true, pred)
 
+    print({"Accuracy" : accuracy,
+           "Precision" : precision,
+           "F1 Score" : f1})
 
 if __name__ == '__main__':
     main()
