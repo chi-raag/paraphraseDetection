@@ -1,0 +1,6 @@
+- training pairs appear as (x_1, x_2, y)
+    - x_1, x_2 come from doc2vec matrix
+- doc2vec matrix: #doc by k
+
+- jack states to construct a set of features that depends on both documents
+    - for example: (x, y), where x = ([x_1 - x_2, y]), etc

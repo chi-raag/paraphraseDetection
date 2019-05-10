@@ -57,6 +57,8 @@ def create_training_data(s, n=2):
 
     return train_dict
 
+def create_doc2vec_data(s):
+    data = create_training_data(s)
 
 def get_average_overlap_proportion(train):
 
