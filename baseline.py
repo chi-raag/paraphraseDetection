@@ -73,11 +73,13 @@ def set_new_quality(test, threshold):
         else:
             test[i]['model quality'] = 0
 
+    return test
+
 def main():
     train = create_training_data("data/msr_paraphrase_train.txt")
     test= create_training_data("data/msr_paraphrase_test.txt")
     threshold = get_average_overlap_proportion(train)
-    set_new_quality(test, threshold)
+    new_test = set_new_quality(test, threshold)
 
 
 if __name__ == '__main__':
