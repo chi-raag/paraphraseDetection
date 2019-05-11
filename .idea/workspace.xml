@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5ef30958-004f-4fba-8eed-a5367bde6364" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/doc2vec_paraphrase.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/notes_With_Jack.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baseline.py" beforeDir="false" afterPath="$PROJECT_DIR$/baseline.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/statistics.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/statistics.ipynb" afterDir="false" />
-    </list>
+    <list default="true" id="5ef30958-004f-4fba-8eed-a5367bde6364" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,11 +14,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="baseline.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="baseline.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/baseline.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
-              <caret line="130" lean-forward="true" selection-start-line="130" selection-end-line="130" />
+            <state relative-caret-position="390">
+              <caret line="130" selection-start-line="130" selection-end-line="130" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -32,23 +26,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="doc2vec_paraphrase.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="doc2vec_paraphrase.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/doc2vec_paraphrase.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="52">
+            <state relative-caret-position="381">
               <caret line="59" column="29" selection-start-line="59" selection-start-column="29" selection-end-line="59" selection-end-column="29" />
               <folding>
                 <element signature="e#0#57#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="msr_paraphrase_train.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data/msr_paraphrase_train.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="18" lean-forward="true" selection-start-column="18" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -257,7 +242,7 @@
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" weight="0.31462926" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3296593" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3296593" />
       <window_info anchor="right" id="Coverage" side_tool="true" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
@@ -354,29 +339,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/baseline.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="130" selection-start-line="130" selection-end-line="130" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/data/msr_paraphrase_train.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state>
-          <caret column="18" lean-forward="true" selection-start-column="18" selection-end-column="18" />
+          <caret column="18" selection-start-column="18" selection-end-column="18" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/doc2vec_paraphrase.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="52">
+        <state relative-caret-position="381">
           <caret line="59" column="29" selection-start-line="59" selection-start-column="29" selection-end-line="59" selection-end-column="29" />
           <folding>
             <element signature="e#0#57#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/baseline.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="130" lean-forward="true" selection-start-line="130" selection-end-line="130" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
           </folding>
         </state>
       </provider>
