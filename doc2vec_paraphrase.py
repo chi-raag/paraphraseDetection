@@ -6,7 +6,6 @@ from sklearn.metrics import accuracy_score
 from sklearn.metrics import precision_score
 from sklearn.metrics import f1_score
 import numpy as np
-import sys
 
 
 def prepare_data(train):
@@ -22,20 +21,14 @@ def prepare_data(train):
     return data, data_array, tagged_data
 
 
-def create_gensim_model(tagged, size=40,
+def create_gensim_model(tagged, size=20,
                         alpha=.025, min_alpha=.00025,
                         min_count=1, dm=1):
     model = Doc2Vec(vector_size=size, alpha=alpha, min_alpha=min_alpha,
                     min_count=min_count, dm=dm)
 
     model.build_vocab(tagged)
-
-    for epoch in range(60):
-        print("iteration " + str(epoch + 1))
-        model.train(tagged, total_examples=model.corpus_count, epochs=model.epochs)
-        model.alpha -= 0.002
-        model.min_alpha = model.alpha
-
+    model.train(tagged, total_examples=model.corpus_count, epochs=model.epochs)
     model.save("d2v.model")
     print("Model Saved")
 
@@ -45,21 +38,20 @@ def dot_prod_features(docvecs, data):
     y_values = []
     i = 0
     while i < len(docvecs) - 1:
-        x_values.append(np.multiply(docvecs[str(i)], docvecs[str(i + 1)]))
+        x_values.append(np.dot(docvecs[str(i)], docvecs[str(i + 1)]))
         i += 2
 
     for i in range(1, len(data) + 1):
         y_values.append(data[i]['quality'])
 
     return x_values, y_values
-
 
 def dot_prod_features_test(docvecs, data):
     x_values = []
     y_values = []
     i = 0
     while i < len(docvecs) - 1:
-        x_values.append(np.multiply(docvecs[(i)], docvecs[(i + 1)]))
+        x_values.append(np.dot(docvecs[(i)], docvecs[(i + 1)]))
         i += 2
 
     for i in range(1, len(data) + 1):
@@ -67,25 +59,24 @@ def dot_prod_features_test(docvecs, data):
 
     return x_values, y_values
 
-
 def main():
     data, data_array, tagged = prepare_data("data/msr_paraphrase_train.txt")
     create_gensim_model(tagged)
     model = Doc2Vec.load("d2v.model")
     x_values, y_values = dot_prod_features(model.docvecs, data)
-    glm = LogisticRegressionCV(cv=5).fit(x_values, y_values)
+    glm = LogisticRegressionCV(cv=5).fit(np.reshape(x_values, (-1, 1)), y_values)
 
     test, test_array, yes = prepare_data("data/msr_paraphrase_test.txt")
 
     docvecs_test = []
 
     for s in test_array:
-        docvecs_test.append(model.infer_vector([s], steps=20, alpha=0.025))
+        docvecs_test.append(model.infer_vector([s]))
 
     print(len(docvecs_test))
 
     x_test, true = dot_prod_features_test(docvecs_test, test)
-    pred = glm.predict(x_test)
+    pred = glm.predict(np.reshape(x_test, (-1, 1)))
 
     print(len(true))
     print(len(pred))
