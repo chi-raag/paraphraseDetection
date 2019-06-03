@@ -1,0 +1,44 @@
+from gensim.models.doc2vec import Doc2Vec, TaggedDocument
+from nltk.tokenize import word_tokenize
+from baseline import create_training_data
+import sys
+import pandas as pd
+import numpy as np
+
+
+def prepare_data(train):
+    data_array = []
+    data = create_training_data(train)
+    tags = []
+
+    for i in range(1, len(data) + 1):
+        data_array.append(data[i]['first'])
+        tags.append(data[i]['quality'])
+        data_array.append(data[i]['second'])
+        tags.append(data[i]['quality'])
+
+    tagged_data = [TaggedDocument(words=word_tokenize(d.lower()),
+                                       tags=[tags[i], i]) for i, d in enumerate(data_array)]
+    return data, data_array, tagged_data
+
+
+def main():
+    data, data_array, tagged = prepare_data("data/msr_paraphrase_train.txt")
+    test, test_array, yes = prepare_data("data/msr_paraphrase_test.txt")
+
+    temp = pd.DataFrame(data_array)
+    temp.to_csv('train_sents.txt', index=False, header=False, sep='|')
+    temp1 = pd.DataFrame(test_array)
+    temp1.to_csv('test_sents.txt', index=False, header=False, sep='|')
+    print("done")
+
+    #print(data_array[0:])
+    #print("start")
+    #np.savetxt('train_sents.txt', np.array(data_array)[0:], delimiter='\t', fmt='%d')
+    #np.savetxt('test_sents.txt', np.array(test_array), delimiter='\t', fmt='%d')
+
+    sys.exit()
+
+
+if __name__ == '__main__':
+    main()
