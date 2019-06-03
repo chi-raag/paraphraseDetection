@@ -4,6 +4,7 @@ from baseline import create_training_data
 from sklearn.linear_model import LogisticRegressionCV
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import precision_score
+from sklearn.metrics import recall_score
 from sklearn.metrics import f1_score
 import numpy as np
 
@@ -73,18 +74,15 @@ def main():
     for s in test_array:
         docvecs_test.append(model.infer_vector([s]))
 
-    print(len(docvecs_test))
-
     x_test, true = dot_prod_features_test(docvecs_test, test)
     pred = glm.predict(np.reshape(x_test, (-1, 1)))
 
-    print(len(true))
-    print(len(pred))
     accuracy = accuracy_score(true, pred)
     precision = precision_score(true, pred)
+    recall = recall_score(true, pred)
     f1 = f1_score(true, pred)
 
-    print({"Accuracy": accuracy, "Precision": precision, "F1 Score": f1})
+    print({"Accuracy": accuracy, "Precision": precision, "Recall": recall, "F1 Score": f1})
 
 
 if __name__ == '__main__':
