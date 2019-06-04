@@ -22,20 +22,34 @@ def prepare_data(train):
     return data, data_array, tagged_data
 
 
+def get_labels(data):
+    y_values = []
+
+    for i in range(1, len(data) + 1):
+        y_values.append(data[i]['quality'])
+
+    return np.array(y_values)
+
+
 def main():
     data, data_array, tagged = prepare_data("data/msr_paraphrase_train.txt")
     test, test_array, yes = prepare_data("data/msr_paraphrase_test.txt")
 
+    train_labels = get_labels(data)
+    test_labels = get_labels(test)
+
+    labels = pd.DataFrame(train_labels)
+    labels.to_csv('train_labels.txt', index=False, header=False, sep=',')
+    labels = pd.DataFrame(test_labels)
+    labels.to_csv('test_labels.txt', index=False, header=False, sep=',')
+
+    '''
     temp = pd.DataFrame(data_array)
     temp.to_csv('train_sents.txt', index=False, header=False, sep='|')
     temp1 = pd.DataFrame(test_array)
     temp1.to_csv('test_sents.txt', index=False, header=False, sep='|')
+    '''
     print("done")
-
-    #print(data_array[0:])
-    #print("start")
-    #np.savetxt('train_sents.txt', np.array(data_array)[0:], delimiter='\t', fmt='%d')
-    #np.savetxt('test_sents.txt', np.array(test_array), delimiter='\t', fmt='%d')
 
     sys.exit()
 
