@@ -3,6 +3,7 @@ import numpy as np
 import nltk
 from nltk.tokenize import RegexpTokenizer
 from sklearn.metrics import accuracy_score
+from sklearn.metrics import recall_score
 from sklearn.metrics import precision_score
 from sklearn.metrics import f1_score
 import matplotlib.pyplot as plt
@@ -109,6 +110,7 @@ def main():
 
     accuracy_a = []
     precision_a = []
+    recall_a = []
     f1_a = []
 
     for i in range(1, 6):
@@ -119,19 +121,23 @@ def main():
         true, pred = get_true_pred(new_test)
         accuracy = accuracy_score(true, pred)
         precision = precision_score(true, pred)
+        recall = recall_score(true, pred)
         f1 = f1_score(true, pred)
 
         print("For ", i, "-gram overlap ", {"Accuracy": accuracy,
                                             "Precision": precision,
+                                            "Recall": recall,
                                             "F1 Score": f1}, sep="")
 
         accuracy_a.append(accuracy)
         precision_a.append(precision)
+        recall_a.append(recall)
         f1_a.append(f1)
 
     plt.figure()
     plt.plot(accuracy_a)
     plt.plot(precision_a)
+    plt.plot(recall_a)
     plt.plot(f1_a)
     plt.xlabel("N-gram")
     plt.ylabel("Score")
