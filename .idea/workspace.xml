@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5ef30958-004f-4fba-8eed-a5367bde6364" name="Default" comment="&quot;better than base update&#10;&quot;">
-      <change afterPath="$PROJECT_DIR$/bert_detection.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_labels.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/train_labels.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sentence_extract" beforeDir="false" afterPath="$PROJECT_DIR$/sentence_extract" afterDir="false" />
+    <list default="true" id="5ef30958-004f-4fba-8eed-a5367bde6364" name="Default" comment="&quot;bunch of new stuff&#10;&quot;">
+      <change beforePath="$PROJECT_DIR$/bert_detection.py" beforeDir="false" afterPath="$PROJECT_DIR$/bert_detection.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -46,8 +42,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/bert_detection.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
-              <caret line="198" column="62" lean-forward="true" selection-start-line="198" selection-start-column="62" selection-end-line="198" selection-end-column="62" />
+            <state relative-caret-position="235">
+              <caret line="184" lean-forward="true" selection-start-line="184" selection-end-line="184" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -258,6 +254,9 @@
       <module name="paraphraseDetection" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -318,10 +317,10 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.doc2vec_paraphrase" />
       <item itemvalue="Python.baseline" />
       <item itemvalue="Python.bert_detection" />
       <item itemvalue="Python.d2v_test" />
+      <item itemvalue="Python.doc2vec_paraphrase" />
     </list>
     <recent_temporary>
       <list>
@@ -354,7 +353,7 @@
       <workItem from="1559348126897" duration="605000" />
       <workItem from="1559546978758" duration="2512000" />
       <workItem from="1559550763217" duration="18329000" />
-      <workItem from="1559624511569" duration="6056000" />
+      <workItem from="1559624511569" duration="6596000" />
     </task>
     <task id="LOCAL-00001" summary="statistics">
       <created>1557462509820</created>
@@ -384,15 +383,21 @@
       <option name="project" value="LOCAL" />
       <updated>1559551708377</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="&quot;bunch of new stuff&#10;&quot;">
+      <created>1559634704447</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1559634704447</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="77565000" />
+    <option name="totallyTimeSpent" value="78105000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="27" width="1853" height="1053" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1925844" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -409,7 +414,7 @@
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" weight="0.3296593" />
       <window_info anchor="bottom" id="Terminal" order="11" />
-      <window_info anchor="bottom" id="Python Console" order="12" visible="true" weight="0.31079608" />
+      <window_info active="true" anchor="bottom" id="Python Console" order="12" visible="true" weight="0.31079608" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -467,7 +472,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="statistics" />
     <MESSAGE value="&quot;better than base update&#10;&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="&quot;better than base update&#10;&quot;" />
+    <MESSAGE value="&quot;bunch of new stuff&#10;&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="&quot;bunch of new stuff&#10;&quot;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -675,8 +681,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/bert_detection.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="198" column="62" lean-forward="true" selection-start-line="198" selection-start-column="62" selection-end-line="198" selection-end-column="62" />
+        <state relative-caret-position="235">
+          <caret line="184" lean-forward="true" selection-start-line="184" selection-end-line="184" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
