@@ -155,6 +155,7 @@ def main():
         sys.exit()
 
     ### Logistic Regression ###
+    print("logistic")
 
     model = Pipeline([('scale', StandardScaler()),
                         ('tsvd', TruncatedSVD(100)),
@@ -171,6 +172,7 @@ def main():
     print({"Accuracy": accuracy, "Precision": precision, "F1 Score": f1})
 
     ### Random Forest ###
+    print("rf")
 
     model = Pipeline([('scale', StandardScaler()),
                         ('tsvd', TruncatedSVD(100)),
@@ -188,23 +190,31 @@ def main():
     print({"Accuracy": accuracy, "Precision": precision, "F1 Score": f1})
 
     ### ENSEMBLE ###
+    print("ensemble")
 
     pipe1 = Pipeline([
         ('col_extract', ColumnExtractor(cols=range(3481, 3483))),
-        # selecting features 0 and 1 (df1) to be used with LR (clf1)
+        ('scale', StandardScaler()),
         ('clf', LogisticRegression())
     ])
 
     pipe2 = Pipeline([
         ('col_extract', ColumnExtractor(cols=range(0, 3481))),
-        # selecting features 2 and 3 (df2) to be used with SVC (clf2)
-        ('clf', RandomForestClassifier(n_estimators=150, max_depth=None,
+        ('clf', RandomForestClassifier(n_estimators=250, max_depth=None,
                                  min_samples_split=2))
     ])
 
     eclf = VotingClassifier(estimators=[('df1-clf1', pipe1), ('df2-clf2', pipe2)], voting='soft', weights=[1, 0.5])
+
     eclf.fit(train_features, train_labels)
-    eclf.score(test_features, test_labels)
+
+    pred = eclf.predict(test_features)
+
+    accuracy = accuracy_score(test_labels, pred)
+    precision = precision_score(test_labels, pred)
+    f1 = f1_score(test_labels, pred)
+
+    print({"Accuracy": accuracy, "Precision": precision, "F1 Score": f1})
 
     ### END ###
 
