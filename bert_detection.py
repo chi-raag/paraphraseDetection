@@ -1,25 +1,17 @@
 import json
 import argparse
-import numpy as np
-from nltk.tokenize import word_tokenize
-from baseline import create_training_data
 from sklearn.linear_model import LogisticRegressionCV, LogisticRegression
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import precision_score
 from sklearn.metrics import f1_score
-from sklearn.svm import SVC, LinearSVC
-from sklearn.model_selection import GridSearchCV, RandomizedSearchCV
 import numpy as np
 import pandas as pd
-from scipy.spatial.distance import cdist, pdist
 import sys
 import tqdm
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import Pipeline
 from sklearn.decomposition import TruncatedSVD
 from sklearn.ensemble import ExtraTreesClassifier, RandomForestClassifier
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.base import TransformerMixin, BaseEstimator
 from sklearn.ensemble import VotingClassifier, AdaBoostClassifier, GradientBoostingClassifier
 
