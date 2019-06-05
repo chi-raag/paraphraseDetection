@@ -11,7 +11,7 @@ import tqdm
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import Pipeline
 from sklearn.decomposition import TruncatedSVD
-from sklearn.ensemble import ExtraTreesClassifier, RandomForestClassifier
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.base import TransformerMixin, BaseEstimator
 from sklearn.ensemble import VotingClassifier, AdaBoostClassifier, GradientBoostingClassifier
 
