@@ -315,10 +315,10 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Python.doc2vec_paraphrase" />
       <item itemvalue="Python.baseline" />
       <item itemvalue="Python.bert_detection" />
       <item itemvalue="Python.d2v_test" />
-      <item itemvalue="Python.doc2vec_paraphrase" />
     </list>
     <recent_temporary>
       <list>
