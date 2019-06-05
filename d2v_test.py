@@ -8,7 +8,6 @@ from sklearn.metrics import f1_score
 from sklearn.svm import SVC, LinearSVC
 from sklearn.model_selection import GridSearchCV, RandomizedSearchCV
 import numpy as np
-from scipy.spatial.distance import cdist, pdist
 import sys
 import tqdm
 from sklearn.preprocessing import StandardScaler
@@ -17,9 +16,6 @@ from sklearn.decomposition import TruncatedSVD
 from sklearn.ensemble import ExtraTreesClassifier, RandomForestClassifier
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-from sklearn.ensemble import VotingClassifier
-from sklearn.base import TransformerMixin, BaseEstimator
-
 
 def prepare_data(train):
     data_array = []
@@ -89,35 +85,6 @@ def vec_for_learning(model, docs):
     return regressors
 
 
-def get_handmade_features(tokens):
-    features = []
-
-    i = 0
-    while i < len(tokens) - 1:
-        temp = []
-        overlap = set(tokens[i]) & set(tokens[i + 1])
-        temp.append(len(overlap))
-        temp.append(abs(len(tokens[i]) - len(tokens[i + 1])))
-        features.append(temp)
-        i += 2
-
-    return features
-
-
-class ColumnExtractor(TransformerMixin, BaseEstimator):
-    def __init__(self, cols):
-        self.cols = cols
-
-    def transform(self, X):
-        col_list = []
-        for c in self.cols:
-            col_list.append(X[:, c:c+1])
-        return np.concatenate(col_list, axis=1)
-
-    def fit(self, X, y=None):
-        return self
-
-
 def main():
     #Get Data
     data, data_array, tagged = prepare_data("data/msr_paraphrase_train.txt")
@@ -130,14 +97,21 @@ def main():
     x_values = create_features(model.docvecs, m)
     y_values = get_labels(data)
 
-    print("handmade features")
-    train_handmade = get_handmade_features(data_array)
     x_values = np.vstack(x_values)
-    train_features = np.concatenate((x_values, np.array(train_handmade)), axis=1)
 
-    print(len(train_features))
-
+    #Get vecs based on d2v model and predict w model
     test, test_array, yes = prepare_data("data/msr_paraphrase_test.txt")
+
+    docvecs_test = []
+
+    for s in test_array:
+        docvecs_test.append(model.infer_vector(word_tokenize(s.lower())))
+
+    print(len(docvecs_test))
+
+    x_test = create_features(docvecs_test, m)
+    true = get_labels(test)
+    x_test = np.vstack(x_test)
 
     # Set up model
     parameters = {
@@ -158,22 +132,6 @@ def main():
 
     # Fit model
     grid.fit(x_values, y_values)
-
-    # Print training acc
-    train_pred = grid.predict(x_values)
-    print(accuracy_score(train_pred, y_values))
-
-    #Get vecs based on d2v model and predict w model
-    docvecs_test = []
-
-    for s in test_array:
-        docvecs_test.append(model.infer_vector(word_tokenize(s.lower())))
-
-    print(len(docvecs_test))
-
-    x_test = create_features(docvecs_test, m)
-    true = get_labels(test)
-    x_test = np.vstack(x_test)
 
     pred = grid.predict(x_test)
 
@@ -202,10 +160,6 @@ def main():
         #LogisticRegressionCV(cv=5, max_iter=2000).fit(x_values, y_values)
     pred = model.predict(x_test)
 
-    #Acc on training set
-    train_pred = model.predict(x_values)
-    print(accuracy_score(train_pred, y_values))
-
     #Print out testing acc etc
     accuracy = accuracy_score(true, pred)
     precision = precision_score(true, pred)
@@ -216,14 +170,10 @@ def main():
     print({"Accuracy": accuracy, "Precision": precision, "F1 Score": f1})
 
     #Extra Trees
-    model = ExtraTreesClassifier(n_estimators=150, max_depth=None,
+    model = ExtraTreesClassifier(n_estimators=300, max_depth=None,
                                  min_samples_split=2, random_state=0)
     model.fit(x_values, y_values)
     pred = model.predict(x_test)
-
-    # Acc on training set
-    train_pred = model.predict(x_values)
-    print(accuracy_score(train_pred, y_values))
 
     # Print out testing acc etc
     accuracy = accuracy_score(true, pred)
@@ -249,13 +199,9 @@ def main():
                                n_iter=5, cv=2,
                                verbose=2, random_state=42)
 
-    model = RandomForestClassifier()
+    model = RandomForestClassifier(n_estimators=300)
     model.fit(x_values, y_values)
     pred = model.predict(x_test)
-
-    # Acc on training set
-    train_pred = model.predict(x_values)
-    print(accuracy_score(train_pred, y_values))
 
     # Print out testing acc etc
     accuracy = accuracy_score(true, pred)
@@ -263,34 +209,6 @@ def main():
     f1 = f1_score(true, pred)
 
     print("RANDOM FOREST ----------------------------------------------")
-    print({"Accuracy": accuracy, "Precision": precision, "F1 Score": f1})
-
-    # ENSEMBLE-----------------------------------------------------------------
-
-    pipe1 = Pipeline([
-        ('col_extract', ColumnExtractor(cols=range(4073, 4075))),
-        ('scale', StandardScaler()),
-        ('clf', LogisticRegression())
-    ])
-
-    pipe2 = Pipeline([
-        ('col_extract', ColumnExtractor(cols=range(0, 4073))),
-        ('clf', RandomForestClassifier(n_estimators=250, max_depth=None,
-                                       min_samples_split=2))
-    ])
-
-    eclf = VotingClassifier(estimators=[('df1-clf1', pipe1),
-                                        ('df2-clf2', pipe2)],
-                            voting='soft', weights=[1, 0.5])
-
-    eclf.fit(train_features, y_values)
-
-    pred = eclf.predict(x_test)
-
-    accuracy = accuracy_score(true, pred)
-    precision = precision_score(true, pred)
-    f1 = f1_score(true, pred)
-
     print({"Accuracy": accuracy, "Precision": precision, "F1 Score": f1})
 
     sys.exit()

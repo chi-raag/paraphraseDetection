@@ -176,7 +176,6 @@ def main():
     print("rf")
 
     model = Pipeline([('scale', StandardScaler()),
-                        ('tsvd', TruncatedSVD(100)),
                         ('tress', RandomForestClassifier(n_estimators=150, max_depth=None,
                                  min_samples_split=2))])
 
@@ -201,6 +200,7 @@ def main():
 
     pipe2 = Pipeline([
         ('col_extract', ColumnExtractor(cols=range(0, 3481))),
+        ('scale', StandardScaler()),
         ('clf', RandomForestClassifier(n_estimators=300, max_depth=None,
                                  min_samples_split=2))
     ])
@@ -228,6 +228,7 @@ def main():
 
     pipe2 = Pipeline([
         ('col_extract', ColumnExtractor(cols=range(0, 3481))),
+        ('scale', StandardScaler()),
         ('clf', AdaBoostClassifier(n_estimators=200))
     ])
 
@@ -254,6 +255,7 @@ def main():
 
     pipe2 = Pipeline([
         ('col_extract', ColumnExtractor(cols=range(0, 3481))),
+        ('scale', StandardScaler()),
         ('clf', GradientBoostingClassifier(n_estimators=200))
     ])
 
