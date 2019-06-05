@@ -17,6 +17,8 @@ from sklearn.decomposition import TruncatedSVD
 from sklearn.ensemble import ExtraTreesClassifier, RandomForestClassifier
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.ensemble import VotingClassifier
+from sklearn.base import TransformerMixin, BaseEstimator
 
 
 def prepare_data(train):
@@ -87,6 +89,35 @@ def vec_for_learning(model, docs):
     return regressors
 
 
+def get_handmade_features(tokens):
+    features = []
+
+    i = 0
+    while i < len(tokens) - 1:
+        temp = []
+        overlap = set(tokens[i]) & set(tokens[i + 1])
+        temp.append(len(overlap))
+        temp.append(abs(len(tokens[i]) - len(tokens[i + 1])))
+        features.append(temp)
+        i += 2
+
+    return features
+
+
+class ColumnExtractor(TransformerMixin, BaseEstimator):
+    def __init__(self, cols):
+        self.cols = cols
+
+    def transform(self, X):
+        col_list = []
+        for c in self.cols:
+            col_list.append(X[:, c:c+1])
+        return np.concatenate(col_list, axis=1)
+
+    def fit(self, X, y=None):
+        return self
+
+
 def main():
     #Get Data
     data, data_array, tagged = prepare_data("data/msr_paraphrase_train.txt")
@@ -99,7 +130,16 @@ def main():
     x_values = create_features(model.docvecs, m)
     y_values = get_labels(data)
 
-    #Set up model
+    print("handmade features")
+    train_handmade = get_handmade_features(data_array)
+    x_values = np.vstack(x_values)
+    train_features = np.concatenate((x_values, np.array(train_handmade)), axis=1)
+
+    print(len(train_features))
+
+    test, test_array, yes = prepare_data("data/msr_paraphrase_test.txt")
+
+    # Set up model
     parameters = {
         #"kernel": ["rbf"],
         #"C": [1, 10, 10, 100, 1000],
@@ -115,20 +155,11 @@ def main():
                         ('tsvd', TruncatedSVD(100)),
                         ('SVC', LinearSVC(max_iter=2000))])
     grid = GridSearchCV(SVCpipe, parameters, cv=2, verbose=2)
-    x_values = np.vstack(x_values)
 
-    #Print shape info
-    shape = x_values.shape
-    print(shape)
-    print(y_values.shape)
-
-    #Fit model
+    # Fit model
     grid.fit(x_values, y_values)
 
-    test, test_array, yes = prepare_data("data/msr_paraphrase_test.txt")
-
-
-    #Print training acc
+    # Print training acc
     train_pred = grid.predict(x_values)
     print(accuracy_score(train_pred, y_values))
 
@@ -145,18 +176,13 @@ def main():
     x_test = np.vstack(x_test)
 
     pred = grid.predict(x_test)
-    
-    #Print out a couple of checks
-    print(len(true))
-    print(len(pred))
-    print(x_test[:3])
-    print(pred[0:])
-    print(np.mean(true))
-    
+
     #Print Acc etc
     accuracy = accuracy_score(true, pred)
     precision = precision_score(true, pred)
     f1 = f1_score(true, pred)
+
+    print("SVC ------------------------------------------------------")
 
     print({"Accuracy": accuracy, "Precision": precision, "F1 Score": f1})
 
@@ -185,6 +211,8 @@ def main():
     precision = precision_score(true, pred)
     f1 = f1_score(true, pred)
 
+    print("LOGISTIC ---------------------------------------------------")
+
     print({"Accuracy": accuracy, "Precision": precision, "F1 Score": f1})
 
     #Extra Trees
@@ -202,9 +230,12 @@ def main():
     precision = precision_score(true, pred)
     f1 = f1_score(true, pred)
 
+    print("EXTRA TRESS --------------------------------------------------")
+
     print({"Accuracy": accuracy, "Precision": precision, "F1 Score": f1})
 
-    #RF
+    # RANDOM FOREST
+
     rf_grid = {'bootstrap': [True, False],
                'max_depth': [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, None],
                'max_features': ['auto', 'sqrt'],
@@ -212,9 +243,13 @@ def main():
                'min_samples_split': [2, 5, 10],
                'n_estimators': [100, 200, 400]}
 
+    rf_grid = {'bootstrap': [True, False]}
+
     model = RandomizedSearchCV(RandomForestClassifier(), rf_grid,
                                n_iter=5, cv=2,
                                verbose=2, random_state=42)
+
+    model = RandomForestClassifier()
     model.fit(x_values, y_values)
     pred = model.predict(x_test)
 
@@ -223,6 +258,35 @@ def main():
     print(accuracy_score(train_pred, y_values))
 
     # Print out testing acc etc
+    accuracy = accuracy_score(true, pred)
+    precision = precision_score(true, pred)
+    f1 = f1_score(true, pred)
+
+    print("RANDOM FOREST ----------------------------------------------")
+    print({"Accuracy": accuracy, "Precision": precision, "F1 Score": f1})
+
+    # ENSEMBLE-----------------------------------------------------------------
+
+    pipe1 = Pipeline([
+        ('col_extract', ColumnExtractor(cols=range(4073, 4075))),
+        ('scale', StandardScaler()),
+        ('clf', LogisticRegression())
+    ])
+
+    pipe2 = Pipeline([
+        ('col_extract', ColumnExtractor(cols=range(0, 4073))),
+        ('clf', RandomForestClassifier(n_estimators=250, max_depth=None,
+                                       min_samples_split=2))
+    ])
+
+    eclf = VotingClassifier(estimators=[('df1-clf1', pipe1),
+                                        ('df2-clf2', pipe2)],
+                            voting='soft', weights=[1, 0.5])
+
+    eclf.fit(train_features, y_values)
+
+    pred = eclf.predict(x_test)
+
     accuracy = accuracy_score(true, pred)
     precision = precision_score(true, pred)
     f1 = f1_score(true, pred)
