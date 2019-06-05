@@ -23,7 +23,7 @@ Running this command will print the accuracy, precision, and f1 score of the doc
 To run the BERT-embeddings based classifier, it is necessary to download a pre-trained BERT model eg. BERT-Large, Uncased), and then use BERT to extract fixed feature vectors for the sentences in MSRP training and test data. More information available from the [BERT github page](https://github.com/google-research/bert). Then run the classifier using:
 
 ```python
-bert\_detection.py \[-h\] \[--train TRAIN\] \[--test TEST\]
+bert_detection.py [-h] [--train TRAIN] [--test TEST]
 ```
 
 optional arguments:
