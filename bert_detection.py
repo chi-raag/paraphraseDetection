@@ -1,4 +1,5 @@
 import json
+import argparse
 import numpy as np
 from nltk.tokenize import word_tokenize
 from baseline import create_training_data
@@ -21,6 +22,17 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.base import TransformerMixin, BaseEstimator
 from sklearn.ensemble import VotingClassifier, AdaBoostClassifier, GradientBoostingClassifier
+
+
+def parse_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--train',
+                        default='para_train.jsonl',
+                        help='path to output of BERT extract features script with MSRP training data')
+    parser.add_argument('--test',
+                        default='para_test.jsonl',
+                        help='path to output of BERT extract features script with MSRP test data')
+    return parser.parse_args()
 
 
 def get_bert_features(path):
@@ -115,9 +127,11 @@ class ColumnExtractor(TransformerMixin, BaseEstimator):
 
 
 def main():
+    args = parse_args()
+
     print("reading data")
-    bert_train, train_tokenized = get_bert_features('/home/elliot/Documents/Spring_2019/NLP/bert/tmp/para_train.jsonl')
-    bert_test, test_tokenized = get_bert_features('/home/elliot/Documents/Spring_2019/NLP/bert/tmp/para_test.jsonl')
+    bert_train, train_tokenized = get_bert_features(args.train)
+    bert_test, test_tokenized = get_bert_features(args.test)
 
     print("handmade features")
     train_handmade = get_handmade_features(train_tokenized)
