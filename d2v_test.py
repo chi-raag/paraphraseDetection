@@ -1,7 +1,7 @@
 from gensim.models.doc2vec import Doc2Vec, TaggedDocument
 from nltk.tokenize import word_tokenize
 from baseline import create_training_data
-from sklearn.linear_model import LogisticRegressionCV, LogisticRegression
+from sklearn.linear_model import LogisticRegressionCV
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import precision_score
 from sklearn.metrics import f1_score
@@ -52,15 +52,8 @@ def create_features(docvecs, m):
 
     i = 0
     while i < len(docvecs) - 1:
-        #temp = np.zeros((1, 2))
-        #temp = np.multiply(docvecs[i], docvecs[i + 1]).flatten()
-        #np.append(temp, np.dot(docvecs[str(i)], docvecs[str(i + 1)]))
-
         temp = np.outer(docvecs[i], docvecs[i + 1]).flatten()
-        np.append(cosine_similarity(m[1], m[i+1]).flatten(), temp)
-        #temp.append(np.sqrt(np.sum(np.power(np.subtract(docvecs[str(i)], docvecs[str(i + 1)]), 2))))
-        #temp.append(cdist(docvecs[str(i)], docvecs[str(i + 1)], 'cosine'))
-        #temp.append(pdist(docvecs[str(i)], docvecs[str(i + 1)], 'seuclidean', V=None))
+        #np.append(cosine_similarity(m[1], m[i+1]).flatten(), temp)
         x_values.append(temp)
         i += 2
 
