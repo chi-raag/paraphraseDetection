@@ -20,7 +20,7 @@ from sklearn.ensemble import ExtraTreesClassifier, RandomForestClassifier
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.base import TransformerMixin, BaseEstimator
-from sklearn.ensemble import VotingClassifier
+from sklearn.ensemble import VotingClassifier, AdaBoostClassifier, GradientBoostingClassifier
 
 
 def get_bert_features(path):
@@ -82,6 +82,7 @@ def pad_to_dense(M, maxlen):
         #np.append(r, np.zeros(maxlen - len(r))).flatten()
         if len(r) != maxlen:
             temp1 = r
+            #mean = np.mean(r)
             [temp1.append(0) for _ in range(maxlen - len(r))]
             temp.append(temp1)
         else:
@@ -189,8 +190,8 @@ def main():
 
     print({"Accuracy": accuracy, "Precision": precision, "F1 Score": f1})
 
-    ### ENSEMBLE ###
-    print("ensemble")
+    ### ENSEMBLE RF ###
+    print("ensemble rf")
 
     pipe1 = Pipeline([
         ('col_extract', ColumnExtractor(cols=range(3481, 3483))),
@@ -200,8 +201,60 @@ def main():
 
     pipe2 = Pipeline([
         ('col_extract', ColumnExtractor(cols=range(0, 3481))),
-        ('clf', RandomForestClassifier(n_estimators=250, max_depth=None,
+        ('clf', RandomForestClassifier(n_estimators=300, max_depth=None,
                                  min_samples_split=2))
+    ])
+
+    eclf = VotingClassifier(estimators=[('df1-clf1', pipe1), ('df2-clf2', pipe2)], voting='soft', weights=[1, 0.5])
+
+    eclf.fit(train_features, train_labels)
+
+    pred = eclf.predict(test_features)
+
+    accuracy = accuracy_score(test_labels, pred)
+    precision = precision_score(test_labels, pred)
+    f1 = f1_score(test_labels, pred)
+
+    print({"Accuracy": accuracy, "Precision": precision, "F1 Score": f1})
+
+    ### ENSEMBLE ADA ###
+    print("ensemble ada")
+
+    pipe1 = Pipeline([
+        ('col_extract', ColumnExtractor(cols=range(3481, 3483))),
+        ('scale', StandardScaler()),
+        ('clf', LogisticRegression())
+    ])
+
+    pipe2 = Pipeline([
+        ('col_extract', ColumnExtractor(cols=range(0, 3481))),
+        ('clf', AdaBoostClassifier(n_estimators=200))
+    ])
+
+    eclf = VotingClassifier(estimators=[('df1-clf1', pipe1), ('df2-clf2', pipe2)], voting='soft', weights=[1, 0.5])
+
+    eclf.fit(train_features, train_labels)
+
+    pred = eclf.predict(test_features)
+
+    accuracy = accuracy_score(test_labels, pred)
+    precision = precision_score(test_labels, pred)
+    f1 = f1_score(test_labels, pred)
+
+    print({"Accuracy": accuracy, "Precision": precision, "F1 Score": f1})
+
+    ### ENSEMBLE GRADIENT ###
+    print("ensemble gradient")
+
+    pipe1 = Pipeline([
+        ('col_extract', ColumnExtractor(cols=range(3481, 3483))),
+        ('scale', StandardScaler()),
+        ('clf', LogisticRegression())
+    ])
+
+    pipe2 = Pipeline([
+        ('col_extract', ColumnExtractor(cols=range(0, 3481))),
+        ('clf', GradientBoostingClassifier(n_estimators=200))
     ])
 
     eclf = VotingClassifier(estimators=[('df1-clf1', pipe1), ('df2-clf2', pipe2)], voting='soft', weights=[1, 0.5])

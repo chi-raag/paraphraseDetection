@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="5ef30958-004f-4fba-8eed-a5367bde6364" name="Default" comment="&quot;bunch of new stuff&#10;&quot;">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bert_detection.py" beforeDir="false" afterPath="$PROJECT_DIR$/bert_detection.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,7 +19,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/doc2vec_paraphrase.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="900">
+            <state relative-caret-position="885">
               <caret line="67" column="48" selection-start-line="67" selection-start-column="48" selection-end-line="67" selection-end-column="48" />
               <folding>
                 <element signature="e#0#57#0" expanded="true" />
@@ -27,11 +28,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/d2v_test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="9">
-              <caret line="168" column="12" lean-forward="true" selection-start-line="168" selection-start-column="12" selection-end-line="168" selection-end-column="12" />
+            <state relative-caret-position="235">
+              <caret line="210" column="45" selection-start-line="210" selection-start-column="45" selection-end-line="210" selection-end-column="45" />
               <folding>
                 <element signature="e#0#57#0" expanded="true" />
               </folding>
@@ -39,11 +40,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bert_detection.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="506">
-              <caret line="210" column="38" lean-forward="true" selection-start-line="210" selection-start-column="38" selection-end-line="210" selection-end-column="38" />
+            <state>
+              <caret line="243" column="30" lean-forward="true" selection-start-line="243" selection-start-column="30" selection-end-line="243" selection-end-column="30" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -54,7 +55,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$USER_HOME$/anaconda3/envs/scag/lib/python3.6/site-packages/numpy/matrixlib/defmatrix.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="196">
+            <state relative-caret-position="2895">
               <caret line="193" selection-start-line="193" selection-end-line="193" />
             </state>
           </provider>
@@ -63,7 +64,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sentence_extract">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
+            <state relative-caret-position="540">
               <caret line="41" column="25" selection-start-line="41" selection-start-column="25" selection-end-line="41" selection-end-column="25" />
               <folding>
                 <element signature="e#0#57#0" expanded="true" />
@@ -75,7 +76,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/baseline.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1349">
+            <state relative-caret-position="2040">
               <caret line="144" selection-start-line="144" selection-end-line="144" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
@@ -87,7 +88,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$USER_HOME$/anaconda3/envs/scag/lib/python3.6/site-packages/numpy/core/fromnumeric.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="174">
+            <state relative-caret-position="46380">
               <caret line="3105" selection-start-line="3105" selection-end-line="3105" />
             </state>
           </provider>
@@ -96,7 +97,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Visulization.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
+            <state relative-caret-position="405">
               <caret line="30" column="18" selection-start-line="30" selection-start-column="18" selection-end-line="30" selection-end-column="18" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
@@ -150,6 +151,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="ProjectPane" />
       <pane id="Scope">
         <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
           <expand>
@@ -166,7 +168,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -255,6 +256,9 @@
       <module name="paraphraseDetection" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -315,10 +319,10 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.doc2vec_paraphrase" />
       <item itemvalue="Python.baseline" />
       <item itemvalue="Python.bert_detection" />
       <item itemvalue="Python.d2v_test" />
+      <item itemvalue="Python.doc2vec_paraphrase" />
     </list>
     <recent_temporary>
       <list>
@@ -351,7 +355,9 @@
       <workItem from="1559348126897" duration="605000" />
       <workItem from="1559546978758" duration="2512000" />
       <workItem from="1559550763217" duration="18329000" />
-      <workItem from="1559624511569" duration="7340000" />
+      <workItem from="1559624511569" duration="7956000" />
+      <workItem from="1559716626927" duration="1962000" />
+      <workItem from="1559760078562" duration="344000" />
     </task>
     <task id="LOCAL-00001" summary="statistics">
       <created>1557462509820</created>
@@ -402,16 +408,23 @@
       <option name="project" value="LOCAL" />
       <updated>1559635344769</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="&quot;bunch of new stuff&#10;&quot;">
+      <created>1559636426614</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1559636426614</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="78849000" />
+    <option name="totallyTimeSpent" value="81771000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="27" width="1853" height="1053" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1925844" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19701162" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -492,7 +505,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/bert_detection.py</url>
-          <line>136</line>
+          <line>137</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
       </breakpoints>
@@ -585,16 +598,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/doc2vec_paraphrase.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="900">
-          <caret line="67" column="48" selection-start-line="67" selection-start-column="48" selection-end-line="67" selection-end-column="48" />
-          <folding>
-            <element signature="e#0#57#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/anaconda3/envs/scag/lib/python3.6/codecs.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4785">
@@ -630,16 +633,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/d2v_test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="9">
-          <caret line="168" column="12" lean-forward="true" selection-start-line="168" selection-start-column="12" selection-end-line="168" selection-end-column="12" />
-          <folding>
-            <element signature="e#0#57#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/anaconda3/envs/scag/lib/python3.6/site-packages/sklearn/preprocessing/data.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
@@ -647,37 +640,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Visulization.py">
+    <entry file="file://$PROJECT_DIR$/doc2vec_paraphrase.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="30" column="18" selection-start-line="30" selection-start-column="18" selection-end-line="30" selection-end-column="18" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/anaconda3/envs/scag/lib/python3.6/site-packages/numpy/core/fromnumeric.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="174">
-          <caret line="3105" selection-start-line="3105" selection-end-line="3105" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/baseline.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1349">
-          <caret line="144" selection-start-line="144" selection-end-line="144" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sentence_extract">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="41" column="25" selection-start-line="41" selection-start-column="25" selection-end-line="41" selection-end-column="25" />
+        <state relative-caret-position="885">
+          <caret line="67" column="48" selection-start-line="67" selection-start-column="48" selection-end-line="67" selection-end-column="48" />
           <folding>
             <element signature="e#0#57#0" expanded="true" />
           </folding>
@@ -686,17 +652,64 @@
     </entry>
     <entry file="file://$USER_HOME$/anaconda3/envs/scag/lib/python3.6/site-packages/numpy/matrixlib/defmatrix.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
+        <state relative-caret-position="2895">
           <caret line="193" selection-start-line="193" selection-end-line="193" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sentence_extract">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="41" column="25" selection-start-line="41" selection-start-column="25" selection-end-line="41" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#57#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/baseline.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2040">
+          <caret line="144" selection-start-line="144" selection-end-line="144" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda3/envs/scag/lib/python3.6/site-packages/numpy/core/fromnumeric.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="46380">
+          <caret line="3105" selection-start-line="3105" selection-end-line="3105" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Visulization.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="30" column="18" selection-start-line="30" selection-start-column="18" selection-end-line="30" selection-end-column="18" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/bert_detection.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="506">
-          <caret line="210" column="38" lean-forward="true" selection-start-line="210" selection-start-column="38" selection-end-line="210" selection-end-column="38" />
+        <state>
+          <caret line="243" column="30" lean-forward="true" selection-start-line="243" selection-start-column="30" selection-end-line="243" selection-end-column="30" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/d2v_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="235">
+          <caret line="210" column="45" selection-start-line="210" selection-start-column="45" selection-end-line="210" selection-end-column="45" />
+          <folding>
+            <element signature="e#0#57#0" expanded="true" />
           </folding>
         </state>
       </provider>
